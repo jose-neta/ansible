@@ -13,6 +13,36 @@ export MAX_WHAT=$1; shift
 export MAX_ACTION=$1; shift
 export MAX_ENV=$1; shift
 
+function getListofServices {
+    for i in playbooks/"${PLBK_PREFIX}"*.yml
+    do
+        printf "    "; basename $i | sed -e "s/${PLBK_PREFIX}//" -e 's/\.ya?ml//'
+        printf "    "; ansible-playbook --list-tags -i inventories/prd-sample $i | grep "TASK TAGS:" | sed -e 's/TASK TAGS://'
+    done
+}
+
+function myhelp() {
+cat << EOH
+Usage:
+  ./max.sh [WHAT] [ACTION] [ENVIRONMENT]
+
+  ie:
+    ./max.sh sample-service-go fetch prd
+
+  list of services:
+EOH
+  getListofServices
+}
+
+# user passed in all params or we throw him the help in his face
+if [ -z "$MAX_ENV" ]; then
+    myhelp
+    exit 1
+fi
+
+myhelp
+exit 1
+
 # shift can result in error, so we move this over here and test MAX_ENV before
 # doing anything
 set -e
@@ -60,32 +90,6 @@ function runPlay() {
     [ ! -z "$DEBUG" ] || exec ${CMD} $@
 }
 
-function getListofServices {
-    for i in playbooks/"${PLBK_PREFIX}"*.yml
-    do
-        printf "    "; basename $i | sed -e "s/${PLBK_PREFIX}//" -e 's/\.ya?ml//'
-        printf "    "; ansible-playbook --list-tags -i inventories/prd-sample $i | grep "TASK TAGS:" | sed -e 's/TASK TAGS://'
-    done
-}
-
-function myhelp() {
-cat << EOH
-Usage:
-  ./max.sh [WHAT] [ACTION] [ENVIRONMENT]
-
-  ie:
-    ./max.sh sample-service-go fetch prd
-
-  list of services:
-EOH
-  getListofServices
-}
-
-# user passed in all params or we throw him the help in his face
-if [ -z "$MAX_ENV" ]; then
-    myhelp
-    exit 1
-fi
 
 case "${MAX_ACTION}" in
     "help" | "" ) # show the help
