@@ -40,9 +40,6 @@ if [ -z "$MAX_ENV" ]; then
     exit 1
 fi
 
-myhelp
-exit 1
-
 # shift can result in error, so we move this over here and test MAX_ENV before
 # doing anything
 set -e
