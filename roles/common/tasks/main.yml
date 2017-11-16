@@ -2,9 +2,9 @@
 # file: #roles/common/tasks/main.yml
 
 - name: SYSTEM / amazon
-  include: amazon.yml
+  import_tasks: amazon.yml
   when: ansible_distribution == "Amazon"
 
 - name: SYSTEM / ubuntu
-  include: ubuntu.yml
+  import_tasks: ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
