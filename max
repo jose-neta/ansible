@@ -24,7 +24,7 @@ function getListofServices {
 function myhelp() {
 cat << EOH
 Usage:
-  ./max.sh [WHAT] [ACTION] [ENVIRONMENT]
+  ./max.sh [WHAT] [ACTION] [WHERE]
 
   ie:
     ./max.sh sample-service-go fetch prd

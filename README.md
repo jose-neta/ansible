@@ -10,7 +10,7 @@ https://registry.hub.docker.com/u/include/ansible/
 
 ## MAX
 
-Max is a private joke still it is a simple wrapper around some ugly `ansible-playbook`commands, to help anyone using it easily every day without thinking too much. Just pick-up a service name for your playbook ```[WHAT]```, a task ```[ACTION]``` and apply it to a destination ```[ENVIRONMENT]```. Thats it.
+Max is a private joke still it is a simple wrapper around some ugly `ansible-playbook`commands, to help anyone using it easily every day without thinking too much. Just pick-up a service name for your playbook ```[WHAT]```, a task ```[ACTION]``` and apply it to an environment ```[WHERE]```. Thats it.
 
 Lets take a look...
 
@@ -18,7 +18,7 @@ Lets take a look...
 ./max
 
 Usage:
-  ./max.sh [WHAT] [ACTION] [ENVIRONMENT]
+  ./max.sh [WHAT] [ACTION] [WHERE]
 
   ie:
     ./max.sh sample-service-go fetch prd
